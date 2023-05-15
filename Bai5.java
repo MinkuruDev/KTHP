@@ -8,10 +8,11 @@ public class Bai5 {
     static int m = 0;
     static String gene = "";
     public static void main(String[] args) {
-        
+        readFile();
+        checkPureGene(gene, m);
     }
 
-    public static boolean isPureGene(String gene, int m){
+    public static void checkPureGene(String gene, int m){
         int n = gene.length();
         for(int i = 1; i<=m; i++){
             String seg = "";
@@ -20,16 +21,17 @@ public class Bai5 {
                 seg += gene.charAt(j);
             }
             while(j < n){
-                if(seg.charAt(j % i) == gene.charAt(j))
-                    continue;
+                if(seg.charAt(j % i) != gene.charAt(j))
+                    break;
                 j++;
             }
             if(j == n){
-                
+                System.out.println(seg);
                 return;
             }
         }
-        return false;
+        
+        System.out.println("NO");
     }
 
     public static void readFile(){
@@ -37,7 +39,8 @@ public class Bai5 {
         File file = new File(path);
         try {
             Scanner scanner = new Scanner(file);
-            gene = scanner.nextLine();
+            m = scanner.nextInt();
+            gene = scanner.next();
             scanner.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
